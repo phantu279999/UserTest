@@ -1,0 +1,17 @@
+{
+  "run": [
+    "get_list_youtube"
+  ],
+  "get_list_youtube": {
+    "action": [
+      {
+        "xpath": "",
+        "type": ""
+      },
+      {
+        "xpath": "",
+        "type": ""
+      }
+    ]
+  }
+}

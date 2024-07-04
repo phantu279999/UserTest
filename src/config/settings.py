@@ -1,0 +1,10 @@
+
+PAGE_LOAD_STRATEGY = 'eager'
+"""
+    normal: trang tải xong html, js, css.
+    eager: trang chỉ cần tải xong html.
+"""
+
+IMPLICITLY_WAIT = 10
+
+LOAD_TIME_OUT = 120
