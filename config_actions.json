@@ -6,12 +6,17 @@
     "action": [
       {
         "xpath": "",
+        "data": "",
         "type": ""
       },
       {
         "xpath": "",
+        "data": "",
         "type": ""
       }
     ]
-  }
+  },
+  "list_type": [
+
+  ]
 }

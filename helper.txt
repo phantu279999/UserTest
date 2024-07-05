@@ -1,0 +1,45 @@
+type_action:
+    get_domain,
+    open_new_tab,
+    click,
+    input,
+    input_enter,
+    enter,
+    switch_to_frame,
+    switch_to_next_tab,
+    switch_to_last_tab,
+    switch_to_first_tab,
+    move,
+    move_click,
+    drag_and_drop,
+    clear,
+    clear_and_input
+
+element_action:
+    name,
+    type,
+    locator,
+    locator_type,
+    value,
+    sleep,
+    result,
+    locator_type_2,
+    locator_2,
+
+
+type_locator:
+    id
+    xpath
+    link text
+    partial link text
+    name
+    tag name
+    class name
+    css selector
+
+
+type_result:
+    title,
+    xpath,
+    display,
+    xpath_text
