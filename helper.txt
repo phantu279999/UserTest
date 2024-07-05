@@ -28,6 +28,7 @@ element_action:
 
 
 type_locator:
+# default xpath
     id
     xpath
     link text

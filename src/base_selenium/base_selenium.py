@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
 
-from setup_driver import setup_chrome
+from src.base_selenium.setup_driver import setup_chrome
 
 
 class BaseSelenium:

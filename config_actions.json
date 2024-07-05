@@ -1,22 +1,36 @@
 {
   "run": [
-    "get_list_youtube"
+    "test_login"
   ],
-  "get_list_youtube": {
+  "test_login": {
     "action": [
       {
-        "xpath": "",
-        "data": "",
-        "type": ""
+        "name": "",
+        "value": "http://testphp.vulnweb.com/",
+        "type": "get_domain"
       },
       {
-        "xpath": "",
-        "data": "",
-        "type": ""
+        "locator": "//a[@href='login.php']",
+        "type": "click"
+      },
+      {
+        "type": "input",
+        "value": "test",
+        "locator": "//input[@name=\"uname\"]"
+      },
+      {
+        "type": "input",
+        "value": "test",
+        "locator": "//input[@name=\"pass\"]"
+      },
+      {
+        "locator": "//input[@value=\"login\"]",
+        "type": "click",
+        "result": {
+          "type": "title",
+          "value": "user info"
+        }
       }
     ]
-  },
-  "list_type": [
-
-  ]
+  }
 }
