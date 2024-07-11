@@ -10,5 +10,5 @@ if __name__ == '__main__':
 
 	for test_case in data['run']:
 		for action in data[test_case]['action']:
-			print(action)
+			process_actions.process_action(action)
 

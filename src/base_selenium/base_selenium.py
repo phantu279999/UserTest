@@ -9,6 +9,9 @@ class BaseSelenium:
 	def __init__(self):
 		self._driver = setup_chrome()
 
+	def get_domain(self, domain):
+		self._driver.get(domain)
+
 	def get_title(self):
 		return self._driver.title
 
