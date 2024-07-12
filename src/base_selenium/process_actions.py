@@ -1,3 +1,5 @@
+import json
+
 
 from src.base_selenium.base_selenium import BaseSelenium
 
@@ -6,6 +8,15 @@ class ProcessActions(BaseSelenium):
 
 	def __init__(self):
 		BaseSelenium.__init__(self)
+
+	def app_run(self):
+		data = {}
+		with open("config_actions.json", "r") as f:
+			data = json.loads(f.read())
+
+		for test_case in data['run']:
+			for action in data[test_case]['action']:
+				self.process_action(action)
 
 	def process_action(self, obj):
 		if obj['type'] == 'get_domain':
@@ -40,16 +51,24 @@ class ProcessActions(BaseSelenium):
 			self._clear_and_input(obj)
 
 	def _get_domain(self, obj):
+		if 'value' not in obj:
+			return False
 		self.get_domain(obj['value'])
 
 	def _open_new_tab(self, obj):
 		...
 
 	def _click(self, obj):
-		...
+		if 'locator' not in obj:
+			return False
+		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
+		self.click_to_element(element)
 
 	def _input(self, obj):
-		...
+		if 'locator' not in obj:
+			return False
+		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
+		self.input_to_element(element, obj['value'])
 
 	def _input_enter(self, obj):
 		...
