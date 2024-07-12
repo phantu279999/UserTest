@@ -26,6 +26,7 @@ def random_string(length=8):
 
 
 def convert_vietnamese_to_url(string):
+	# not complete
 	a_vietnamese = 'á|à|̀ạ|ã|ả|ấ|ầ|ậ|ẫ|ẩ|ắ|ằ|ẳ|ẵ|ặ|é|è|̀ẹ|ê|ẻ|ế|ề|ệ|ễ|ể|ế|ề|ể|ễ|ặ|í|ì|̀ị|ĩ|ỉ|ấ|ầ|ậ|ẫ|ẩ|ắ|ằ|ẳ|ẵ|ặ|ó|ò|̀ọ|õ|ỏ|ố|ồ|ộ|ỗ|ổ|ố|ồ|ổ|õ|ụ|ù|̀ụ|ũ|ủ|ấ|ầ|ậ|ẫ|ẩ|ắ|ằ|ẳ|ẵ|ặ|ý|ỳ|̀ỵ|ỹ|ỷ|ấ|ầ|ậ|ẫ|ẩ|ắ|ằ|ẳ|ẵ|ặ'
 	e_vietnamese = 'a|a|a|a|a|a|a|a|a|a|a|a|a|a|a|e|e|e|e|e|e|e|e|e|e|e|e|e|e|e|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|u|u|u|u|u|u|u|u|u|u|u|u|u|u|u|y|y|y|y|y|y|y|y|y|y|y|y|y|y|y'
 	res = re.sub(a_vietnamese, e_vietnamese, string)
