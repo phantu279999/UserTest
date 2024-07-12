@@ -3,6 +3,7 @@
     "test_login"
   ],
   "test_login": {
+    "time_sleep_action": 1,
     "action": [
       {
         "name": "",

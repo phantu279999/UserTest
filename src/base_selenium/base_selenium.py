@@ -69,6 +69,9 @@ class BaseSelenium:
 	def input_to_element(self, element, value):
 		element.send_keys(value)
 
+	def input_enter_to_element(self, element, value):
+		element.send_keys(value).send_keys(Keys.ENTER)
+
 	def input_to_element_by_script(self, element, value):
 		try:
 			self._driver.execute_script(f"arguments[0].setAttribute('value', '{value}')", element)
@@ -95,6 +98,9 @@ class BaseSelenium:
 		except:
 			raise Exception('Double enter to element is failed. Please try')
 
+	def clear_text_in_element(self, element):
+		element.clear()
+
 	# ========================== EVENT SWITCH ================================
 	def switch_to_iframe(self, element):
 		try:
@@ -114,11 +120,17 @@ class BaseSelenium:
 		except:
 			raise ValueError('')
 
+	def switch_to_next_window(self):
+		self._driver.switch_to.window(self._driver.current_window_handle)
+
 	def switch_to_default_content(self):
 		try:
 			self._driver.switch_to.default_content()
 		except:
 			raise ValueError('')
+
+	def open_news_window(self, link):
+		self._driver.execute_script('window.open("{}","_blank");'.format(link))
 
 	def scroll_to_element(self, element):
 		try:
