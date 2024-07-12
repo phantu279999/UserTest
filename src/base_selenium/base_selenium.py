@@ -1,9 +1,12 @@
 import os
+import sys
 import time
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.alert import Alert
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from src.base_selenium.setup_driver import setup_chrome
 

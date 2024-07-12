@@ -1,4 +1,8 @@
+import os
+import sys
 import json
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from src.base_selenium.base_selenium import BaseSelenium
 
