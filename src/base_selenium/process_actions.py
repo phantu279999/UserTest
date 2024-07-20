@@ -9,8 +9,8 @@ from src.base_selenium.base_selenium import BaseSelenium
 
 class ProcessActions(BaseSelenium):
 
-	def __init__(self):
-		BaseSelenium.__init__(self)
+	def __init__(self, driver='chrome'):
+		BaseSelenium.__init__(self, driver)
 
 	def app_run(self):
 		data = {}

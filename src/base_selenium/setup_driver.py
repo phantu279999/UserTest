@@ -9,7 +9,7 @@ import chromedriver_autoinstaller
 chromedriver_autoinstaller.install()
 
 
-def setup_chrome():
+def custome_chrome():
 	option = Options()
 	option.page_load_strategy = settings.PAGE_LOAD_STRATEGY
 

@@ -8,12 +8,24 @@ from selenium.webdriver.common.alert import Alert
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from src.base_selenium.setup_driver import setup_chrome
+from src.base_selenium.setup_driver import custome_chrome, custome_chrome_headless, custom_version_mobile, \
+	custom_version_mobile_headless, custome_firefox
 
 
 class BaseSelenium:
-	def __init__(self):
-		self._driver = setup_chrome()
+	def __init__(self, driver='chrome'):
+		if driver == 'chrome':
+			# during the chrome display test
+			self._driver = custome_chrome()
+		elif driver == 'chrome_headless':
+			# during testing chrome is not displayed
+			self._driver = custome_chrome_headless()
+		elif driver == 'chrome_mobile':
+			self._driver = custom_version_mobile()
+		elif driver == 'chrome_mobile_headless':
+			self._driver = custom_version_mobile_headless()
+		elif driver == 'firefox':
+			self._driver = custome_firefox()
 
 	def get_domain(self, domain):
 		self._driver.get(domain)
