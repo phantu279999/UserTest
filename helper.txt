@@ -28,7 +28,7 @@ element_action:
 
 
 type_locator:
-# default xpath
+    # default xpath
     id
     xpath
     link text
@@ -40,7 +40,16 @@ type_locator:
 
 
 type_result:
-    title,
-    xpath,
-    display,
+    title
+        type
+        value
+    xpath
+        type
+        xpath
+    display
+        type
+        xpath
     xpath_text
+        type
+        xpath
+        value

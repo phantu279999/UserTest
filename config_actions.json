@@ -1,6 +1,7 @@
 {
   "run": [
-    "test_login"
+    "test_login",
+    "test_search"
   ],
   "test_login": {
     "time_sleep_action": 1,
@@ -30,6 +31,34 @@
         "result": {
           "type": "title",
           "value": "user info"
+        }
+      }
+    ]
+  },
+  "test_search": {
+    "time_sleep_action": 1,
+    "action": [
+      {
+        "name": "",
+        "value": "http://testphp.vulnweb.com/",
+        "type": "get_domain"
+      },
+      {
+        "locator": "//input[@name=\"searchFor\"]",
+        "type": "input",
+        "value": "test"
+      },
+      {
+        "type": "click",
+        "locator": "//input[@name=\"goButton\"]"
+      },
+      {
+        "locator": "//div[@id=\"content\"]//h2",
+        "type": "click",
+        "result": {
+          "type": "xpath_text",
+          "value": "searched for: test",
+          "xpath": "//div[@id=\"content\"]//h2"
         }
       }
     ]
