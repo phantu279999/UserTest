@@ -13,7 +13,8 @@ class ProcessActions(BaseSelenium):
 		BaseSelenium.__init__(self, driver)
 
 	def app_run(self):
-		data = {}
+		result = []
+		data = []
 		with open("config_actions.json", "r") as f:
 			data = json.loads(f.read())
 		if not data:
@@ -26,17 +27,25 @@ class ProcessActions(BaseSelenium):
 			for action in data[test_case]['action']:
 				print("------------- Action {} -------------".format(step))
 				res = self.process_action(action)
-				if res is False:
-					print("action position {} error")
-				if res:
-					print(res['status'], res['msg'])
+				result.append({
+					"case_test": test_case,
+					"status": res['status'],
+					"message": res['msg']
+				})
+				print(res['status'], res['msg'])
+
 				if 'time_sleep_action' in data[test_case]:
 					self.sleep(data[test_case]['time_sleep_action'])
 				step += 1
 
+		return result
+
 	def process_action(self, obj):
 		if 'type' not in obj:
-			return False
+			return {
+				'status': False,
+				"msg": "Not found 'type' in action"
+			}
 
 		if obj['type'] == 'get_domain':
 			return self._get_domain(obj)
@@ -71,21 +80,30 @@ class ProcessActions(BaseSelenium):
 
 	def _get_domain(self, obj):
 		if 'value' not in obj:
-			return False
+			return {
+				"status": False,
+				"msg": "GET DOMAIN: Not found \'value\' in action"
+			}
 		self.get_domain(obj['value'])
 
 		return self.process_result(obj)
 
 	def _open_new_tab(self, obj):
 		if 'value' not in obj:
-			return False
+			return {
+				"status": False,
+				"msg": "OPEN NEW TAB: Not found \'value\' in action"
+			}
 		self.open_news_window(obj['value'])
 
 		return self.process_result(obj)
 
 	def _click(self, obj):
 		if 'locator' not in obj:
-			return False
+			return {
+				"status": False,
+				"msg": "CLICK: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.click_to_element(element)
 
@@ -93,25 +111,43 @@ class ProcessActions(BaseSelenium):
 
 	def _input(self, obj):
 		if 'locator' not in obj:
-			return False
+			return {
+				"status": False,
+				"msg": "INPUT: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.input_to_element(element, obj['value'])
 
 		return self.process_result(obj)
 
 	def _input_enter(self, obj):
+		if 'locator' not in obj:
+			return {
+				"status": False,
+				"msg": "INPUT ENTER: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.input_enter_to_element(element, obj['value'])
 
 		return self.process_result(obj)
 
 	def _enter(self, obj):
+		if 'locator' not in obj:
+			return {
+				"status": False,
+				"msg": "ENTER: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.enter_to_element(element)
 
 		return self.process_result(obj)
 
 	def _switch_to_frame(self, obj):
+		if 'locator' not in obj:
+			return {
+				"status": False,
+				"msg": "SWITCH TO FRAME: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.switch_to_iframe(element)
 
@@ -133,12 +169,22 @@ class ProcessActions(BaseSelenium):
 		return self.process_result(obj)
 
 	def _move(self, obj):
+		if 'locator' not in obj:
+			return {
+				"status": False,
+				"msg": "MOVE: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.move_mouse_to_element(element)
 
 		return self.process_result(obj)
 
 	def _move_click(self, obj):
+		if 'locator' not in obj:
+			return {
+				"status": False,
+				"msg": "MOVE CLICK: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.move_mouse_to_element(element)
 		self.click_to_element(element)
@@ -146,17 +192,26 @@ class ProcessActions(BaseSelenium):
 		return self.process_result(obj)
 
 	def _drag_and_drop(self, obj):
-
-
+		# Chua xu ly
 		return self.process_result(obj)
 
 	def _clear(self, obj):
+		if 'locator' not in obj:
+			return {
+				"status": False,
+				"msg": "CLEAR: Not found \'locator\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.clear_text_in_element(element)
 
 		return self.process_result(obj)
 
 	def _clear_and_input(self, obj):
+		if 'locator' not in obj or 'value' not in obj:
+			return {
+				"status": False,
+				"msg": "CLEAR AND INPUT: Not found \'locator\' or \'value\' in action"
+			}
 		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
 		self.clear_text_in_element(element)
 		self.input_to_element(element, obj['value'])
@@ -166,7 +221,10 @@ class ProcessActions(BaseSelenium):
 	def process_result(self, obj):
 		res = {}
 		if 'result' not in obj:
-			return None
+			return {
+				"status": True,
+				"msg": "Passed"
+			}
 		self.clear_popup_alert()
 		if 'type' not in obj['result']:
 			res['status'] = False

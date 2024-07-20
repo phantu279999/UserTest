@@ -7,7 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from src.base_selenium.process_actions import ProcessActions
 
 
-driver = 'chrome'
+driver = 'chrome_headless'
 
 
 if __name__ == '__main__':
