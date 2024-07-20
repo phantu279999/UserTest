@@ -12,6 +12,9 @@ class ProcessActions(BaseSelenium):
 	def __init__(self, driver='chrome'):
 		BaseSelenium.__init__(self, driver)
 
+	def write_result_to_file(self, result):
+		...
+
 	def app_run(self):
 		result = []
 		data = []
