@@ -15,13 +15,26 @@ class ProcessActions(BaseSelenium):
 	def write_result_to_file(self, result):
 		...
 
+	@staticmethod
+	def open_file_test_cases():
+		data = {}
+		try:
+			with open("config_actions.json", "r") as f:
+				data = json.loads(f.read())
+			return data
+		except json.decoder.JSONDecodeError as e:
+			print(f"Error decoding JSON: {e}")
+			return data
+		except Exception as e:
+			print("Error: {}".format(e))
+			return data
+
 	def app_run(self):
 		result = []
-		data = []
-		with open("config_actions.json", "r") as f:
-			data = json.loads(f.read())
+		data = self.open_file_test_cases()
+
 		if not data:
-			print("Can't read the file .json. Please try again")
+			print("Can't read the file .json. Please check again")
 			return
 
 		for test_case in data['run']:
@@ -41,6 +54,7 @@ class ProcessActions(BaseSelenium):
 					self.sleep(data[test_case]['time_sleep_action'])
 				step += 1
 
+		self.write_result_to_file(result)
 		return result
 
 	def process_action(self, obj):
