@@ -127,13 +127,13 @@ class BaseSelenium:
 		try:
 			self._driver.switch_to.window(self._driver.window_handles[-1])
 		except:
-			raise ValueError('')
+			raise ValueError('Error when switch to last window')
 
 	def switch_to_first_window(self):
 		try:
 			self._driver.switch_to.window(self._driver.window_handles[0])
 		except:
-			raise ValueError('')
+			raise ValueError('Error when switch to first window')
 
 	def switch_to_next_window(self):
 		self._driver.switch_to.window(self._driver.current_window_handle)
