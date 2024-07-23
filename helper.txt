@@ -53,3 +53,8 @@ type_result:
         type
         xpath
         value
+    url
+        text
+    alert
+        display
+    status

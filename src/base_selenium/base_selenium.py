@@ -8,11 +8,19 @@ from selenium.webdriver.common.alert import Alert
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from src.base_selenium.setup_driver import custome_chrome, custome_chrome_headless, custom_version_mobile, \
-	custom_version_mobile_headless, custome_firefox
+from src.base_selenium.setup_driver import (
+	custome_chrome,
+	custome_chrome_headless,
+	custom_version_mobile,
+	custom_version_mobile_headless,
+	custome_firefox
+)
+from src.base_selenium.check_elements import CheckElementDriver
+from src.base_selenium.conditions import Conditions
 
 
 class BaseSelenium:
+
 	def __init__(self, driver='chrome'):
 		if driver == 'chrome':
 			# during the chrome display test
@@ -27,8 +35,11 @@ class BaseSelenium:
 		elif driver == 'firefox':
 			self._driver = custome_firefox()
 
+		self.check_element = CheckElementDriver()
+		self.condition = Conditions()
+
 	def get_domain(self, domain):
-		self._driver.get(domain)
+		return self._driver.get(domain)
 
 	def get_title(self):
 		return self._driver.title
@@ -48,20 +59,38 @@ class BaseSelenium:
 	def get_element_attribute(self, element, attribute):
 		return element.get_attribute(attribute)
 
+	def get_element_size(self, element):
+		return element.size
+
+	def get_element_location(self, element):
+		return element.location
+
+	def get_element_tag_name(self, element):
+		return element.tag_name
+
+	def get_element_value_of_css_property(self, element, property):
+		return element.value_of_css_property(property)
+
+	def go_back(self):
+		return self._driver.back()
+
+	def go_forward(self):
+		return self._driver.forward()
+
 	def close_driver(self):
-		self._driver.close()
+		return self._driver.close()
 
 	def quit_driver(self):
-		self._driver.quit()
+		return self._driver.quit()
 
 	def refresh_page(self):
 		self._driver.refresh()
 		time.sleep(5)
 
-	# ========================== EVENT CLICK ================================
 	def click_to_element(self, element):
-		element.click()
+		return element.click()
 
+	# ========================== EVENT CLICK ================================
 	def click_to_element_by_script(self, element):
 		try:
 			self._driver.execute_script("arguments[0].click();", element)
@@ -80,10 +109,15 @@ class BaseSelenium:
 		actions.double_click(element)
 		actions.perform()
 
-	# ========================== EVENT INPUT ================================
-	def input_to_element(self, element, value):
-		element.send_keys(value)
+	def submit_to_element(self, element):
+		return element.submit()
 
+	def input_to_element(self, element, value):
+		if not self.check_element.is_element_visible(element):
+			return False
+		return element.send_keys(value)
+
+	# ========================== EVENT INPUT ================================
 	def input_enter_to_element(self, element, value):
 		element.send_keys(value).send_keys(Keys.ENTER)
 
@@ -92,6 +126,9 @@ class BaseSelenium:
 			self._driver.execute_script(f"arguments[0].setAttribute('value', '{value}')", element)
 		except:
 			raise Exception('Input by js is not sucess. Please try')
+
+	def get_element_rect(self, element):
+		return element.rect
 
 	def click_element_input(self, element, value):
 		try:
@@ -114,9 +151,15 @@ class BaseSelenium:
 			raise Exception('Double enter to element is failed. Please try')
 
 	def clear_text_in_element(self, element):
-		element.clear()
+		return element.clear()
 
 	# ========================== EVENT SWITCH ================================
+	def switch_to_parent_iframe(self):
+		try:
+			self._driver.switch_to.parent_frame()
+		except:
+			raise ValueError('Cant switch to parent frame')
+
 	def switch_to_iframe(self, element):
 		try:
 			self._driver.switch_to.frame(element)
@@ -135,14 +178,14 @@ class BaseSelenium:
 		except:
 			raise ValueError('Error when switch to first window')
 
-	def switch_to_next_window(self):
+	def switch_to_current_window(self):
 		self._driver.switch_to.window(self._driver.current_window_handle)
 
 	def switch_to_default_content(self):
 		try:
-			self._driver.switch_to.default_content()
+			return self._driver.switch_to.default_content()
 		except:
-			raise ValueError('')
+			raise ValueError('Cant switch to default content')
 
 	def open_news_window(self, link):
 		self._driver.execute_script('window.open("{}","_blank");'.format(link))
@@ -158,15 +201,22 @@ class BaseSelenium:
 		action.move_to_element(element)
 		action.perform()
 
-	def go_back(self):
-		try:
-			self._driver.execute_script('window.history.go(-1);')
-		except:
-			raise ValueError('Lỗi. Có thể bạn chưa trả về trang trước')
-
-	def clear_popup_alert(self):
+	# ========================== EVENT ALERT ================================
+	def accept_alert(self):
 		try:
 			Alert(self._driver).accept()
+		except:
+			pass
+
+	def dismiss_alert(self):
+		try:
+			Alert(self._driver).dismiss()
+		except:
+			pass
+
+	def get_text_alert(self):
+		try:
+			return Alert(self._driver).text
 		except:
 			pass
 
@@ -194,11 +244,10 @@ class BaseSelenium:
 		try:
 			self._driver.save_screenshot(self.get_path_photo(name_file, prefix))
 		except:
-			raise Exception("")
+			raise Exception("Can't screenshot")
 
-	@staticmethod
-	def is_element_display(element):
-		return element.is_displayed()
+	def is_element_display(self, element):
+		return self.check_element.is_element_visible(element)
 
 	@staticmethod
 	def check_locator_type(locator_type):

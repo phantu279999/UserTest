@@ -242,7 +242,8 @@ class ProcessActions(BaseSelenium):
 				"status": True,
 				"msg": "Passed"
 			}
-		self.clear_popup_alert()
+
+		self.accept_alert()
 		if 'type' not in obj['result']:
 			res['status'] = False
 			res['msg'] = "Not found \'type\' in result"
