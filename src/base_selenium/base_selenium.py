@@ -85,7 +85,7 @@ class BaseSelenium:
 
 	def refresh_page(self):
 		self._driver.refresh()
-		time.sleep(5)
+		self.sleep(5)
 
 	def click_to_element(self, element):
 		return element.click()
