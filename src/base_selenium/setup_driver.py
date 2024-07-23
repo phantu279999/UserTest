@@ -1,34 +1,37 @@
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.firefox.options import Options as OptionFireFox
 from selenium import webdriver
-from src.config import settings
 
 import chromedriver_autoinstaller
+
+from src.config import settings
+from src.base_selenium.setup_options import set_chrome_options, set_firefox_options
 
 # auto download chromedriver
 chromedriver_autoinstaller.install()
 
 
 def custome_chrome():
-	option = Options()
-	option.page_load_strategy = settings.PAGE_LOAD_STRATEGY
+	options_chrome = set_chrome_options(
+		page_load_strategy=True,
+		start_screen_max=True
+	)
 
-	driver = webdriver.Chrome(options=option)
+	driver = webdriver.Chrome(options=options_chrome)
 	driver.implicitly_wait(settings.IMPLICITLY_WAIT)
 	driver.set_page_load_timeout(settings.LOAD_TIME_OUT)
-	driver.maximize_window()
 
 	return driver
 
 
 def custome_chrome_headless():
-	options_chrome = Options()
-	options_chrome.page_load_strategy = "eager"
-	options_chrome.add_argument("--start-maximized")
-	options_chrome.add_argument("--headless")
-	options_chrome.add_argument('--ignore-certificate-errors')
-	options_chrome.add_argument('--ignore-ssl-errors')
-	options_chrome.add_experimental_option('excludeSwitches', ['enable-logging'])
+	options_chrome = set_chrome_options(
+		headless=True,
+		ingore_certifi_errors=True,
+		ingore_ssl_errors=True,
+		start_screen_max=True,
+		page_load_strategy=True,
+		exclude_switches=True,
+	)
 
 	driver = webdriver.Chrome(options=options_chrome)
 	driver.implicitly_wait(settings.IMPLICITLY_WAIT)
@@ -76,9 +79,7 @@ def custom_version_mobile_headless():
 
 
 def custome_firefox():
-	option_firefox = OptionFireFox()
-	option_firefox.page_load_strategy = settings.PAGE_LOAD_STRATEGY
-	# option_firefox.headless = True
+	option_firefox = set_firefox_options(page_load_strategy=True)
 	driver = webdriver.Firefox(options=option_firefox)
 	driver.maximize_window()
 
