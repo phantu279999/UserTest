@@ -1,6 +1,4 @@
-from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-
 import chromedriver_autoinstaller
 
 from src.config import settings
@@ -13,7 +11,7 @@ chromedriver_autoinstaller.install()
 def custome_chrome():
 	options_chrome = set_chrome_options(
 		page_load_strategy=True,
-		start_screen_max=True
+		start_maximized=True
 	)
 
 	driver = webdriver.Chrome(options=options_chrome)
@@ -28,7 +26,7 @@ def custome_chrome_headless():
 		headless=True,
 		ingore_certifi_errors=True,
 		ingore_ssl_errors=True,
-		start_screen_max=True,
+		start_maximized=True,
 		page_load_strategy=True,
 		exclude_switches=True,
 	)
@@ -40,20 +38,14 @@ def custome_chrome_headless():
 
 
 def custom_version_mobile():
-	mobile_emulation = {
-		"deviceName": settings.NAME_DEVICE_MOBILE
-	}
 	# mobile_emulation = {
 	#     "deviceMetrics": {"width": 640, "height": 640, "pixelRatio": 3.0},
 	#     "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"
 	# }
-	option = Options()
-	option.add_argument("--start-maximized")
-	option.add_argument('--ignore-certificate-errors')
-	option.add_argument('--ignore-ssl-errors')
-	option.add_experimental_option('mobileEmulation', mobile_emulation)
-	option.add_experimental_option('excludeSwitches', ['enable-logging'])
-	option.page_load_strategy = settings.PAGE_LOAD_STRATEGY
+	option = set_chrome_options(
+		mobile_emulation=True, start_maximized=True, ingore_certifi_errors=True,
+		ingore_ssl_errors=True, exclude_switches=True, page_load_strategy=True
+	)
 	driver = webdriver.Chrome(options=option)
 	driver.implicitly_wait(10)
 
@@ -61,17 +53,10 @@ def custom_version_mobile():
 
 
 def custom_version_mobile_headless():
-	mobile_emulation = {
-		"deviceName": settings.NAME_DEVICE_MOBILE
-	}
-	option = Options()
-	option.add_argument("--headless")
-	option.add_argument("--start-maximized")
-	option.add_argument('--ignore-certificate-errors')
-	option.add_argument('--ignore-ssl-errors')
-	option.add_experimental_option('mobileEmulation', mobile_emulation)
-	option.add_experimental_option('excludeSwitches', ['enable-logging'])
-	option.page_load_strategy = settings.PAGE_LOAD_STRATEGY
+	option = set_chrome_options(
+		mobile_emulation=True, start_maximized=True, ingore_certifi_errors=True,
+		ingore_ssl_errors=True, exclude_switches=True, page_load_strategy=True, headless=True
+	)
 	driver = webdriver.Chrome(options=option)
 	driver.implicitly_wait(10)
 
