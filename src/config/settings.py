@@ -19,6 +19,8 @@ REMOTE_DEBUGGING_PORT = 8000
 
 WINDOW_SIZE = (1920, 1080)
 
+PROXY_SERVER = "your_proxy_server_ip:port"
+
 DISABLE_FEATURES = [
 	'OptimizationHints',
 	'OptimizationHintsFetching',

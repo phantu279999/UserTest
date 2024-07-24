@@ -40,6 +40,10 @@ def set_chrome_options(
 		exclude_switches=False,
 		disable_3d_apis=False,
 		disable_renderer_backgrounding=False,
+		disable_background_networking=False,
+		disable_notifications=False,
+		mute_audio=False,
+		disable_features=False,
 ):
 	options = Options()
 
@@ -103,10 +107,12 @@ def set_chrome_options(
 		options.page_load_strategy = settings.PAGE_LOAD_STRATEGY
 	if user_agent:
 		# Sets a custom user agent.
-		options.add_argument('user-agent={}'.format(user_agent))
+		from fake_useragent import UserAgent
+		ua = UserAgent()
+		options.add_argument('user-agent={}'.format(ua.random))
 	if proxy_server:
 		# Sets a proxy server.
-		options.add_argument('--proxy-server={}'.format(proxy_server))
+		options.add_argument('--proxy-server={}'.format(settings.PROXY_SERVER))
 	if no_sandbox:
 		# Disables the sandbox mode (often required for running in Docker).
 		options.add_argument('--no-sandbox')
@@ -142,6 +148,14 @@ def set_chrome_options(
 		options.add_argument("--disable-3d-apis")
 	if disable_renderer_backgrounding:
 		options.add_argument("--disable-renderer-backgrounding")
+	if disable_background_networking:
+		options.add_argument("--disable-background-networking")
+	if disable_notifications:
+		options.add_argument("--disable-notifications")
+	if mute_audio:
+		options.add_argument("--mute-audio")
+	if disable_features:
+		options.add_argument("--disable-features=%s" % ",".join(settings.DISABLE_FEATURES))
 
 	# options.add_argument("--safebrowsing-disable-download-protection")
 	# options.add_argument("--disable-browser-side-navigation")
@@ -159,24 +173,27 @@ def set_chrome_options(
 	# options.add_argument("--no-crash-upload")
 	# options.add_argument("--deny-permission-prompts")
 	# options.add_argument(
-	# 	'--simulate-outdated-no-au="Tue, 31 Dec 2099 23:59:59 GMT"'
+	# 	'--simulate-outdated-no-au="Tue, 03 Oct 2055 00:00:00 GMT"'
 	# )
 	# options.add_argument("--disable-ipc-flooding-protection")
 	# options.add_argument("--disable-password-generation")
 	# options.add_argument("--disable-domain-reliability")
 	# options.add_argument("--disable-component-update")
 	# options.add_argument("--disable-breakpad")
-	# options.add_argument("--disable-features=%s" % ",".join(settings.DISABLE_FEATURES))
 	# options.add_argument("--test-type")
 	# options.add_argument("--no-first-run")
 	# options.add_argument("--allow-insecure-localhost")
-	# options.add_argument("--disable-notifications")
 	# options.add_argument(
 	# 	"--disable-autofill-keyboard-accessory-view[8]"
 	# )
 	# options.add_argument("--homepage=about:blank")
 	# options.add_argument("--dom-automation")
 	# options.add_argument("--disable-hang-monitor")
+
+
+	# if single_process:
+	# 	options.add_argument("--single-process")
+
 	return options
 
 

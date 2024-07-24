@@ -11,7 +11,16 @@ chromedriver_autoinstaller.install()
 def custome_chrome():
 	options_chrome = set_chrome_options(
 		page_load_strategy=True,
-		start_maximized=True
+		start_maximized=True,
+		disable_extensions=True,
+		disable_gpu=True,
+		no_sandbox=True,
+		disable_dev_shm_usage=True,
+		incognito=True,
+		disable_background_networking=True,
+		disable_notifications=True,
+		disable_infobars=True,
+		mute_audio=True,
 	)
 
 	driver = webdriver.Chrome(options=options_chrome)
@@ -29,6 +38,15 @@ def custome_chrome_headless():
 		start_maximized=True,
 		page_load_strategy=True,
 		exclude_switches=True,
+		disable_extensions=True,
+		disable_gpu=True,
+		no_sandbox=True,
+		disable_dev_shm_usage=True,
+		incognito=True,
+		disable_background_networking=True,
+		disable_notifications=True,
+		disable_infobars=True,
+		mute_audio=True,
 	)
 
 	driver = webdriver.Chrome(options=options_chrome)
