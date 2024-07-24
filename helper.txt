@@ -40,21 +40,25 @@ type_locator:
 
 
 type_result:
-    title
-        type
-        value
-    xpath
-        type
-        xpath
-    display
-        type
-        xpath
-    xpath_text
-        type
-        xpath
-        value
-    url
-        text
-    alert
-        display
-    status
+    title  # check title is equal
+        type:title
+        value: Hello World!
+    xpath  # check xpath is exits
+        type: xpath
+        xpath: //h1
+    display  # check xpath is display
+        type: display
+        xpath: //h1
+    xpath_text  # check text of xpath is equal
+        type: xpath_text
+        xpath: //h1
+        value: Hello Everybody
+    url  # check current url
+        type: url
+        value: https://example.vn
+    alert  # check display alert
+        type: alert
+        status: true
+    status  # check status code current page
+        type: status
+        value: 404

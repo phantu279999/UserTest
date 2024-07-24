@@ -17,6 +17,7 @@ from src.base_selenium.setup_driver import (
 )
 from src.base_selenium.check_elements import CheckElementDriver
 from src.base_selenium.conditions import Conditions
+from src.base_selenium.check_results import ProcessResultAction
 
 
 class BaseSelenium:
@@ -37,6 +38,7 @@ class BaseSelenium:
 
 		self.check_element = CheckElementDriver()
 		self.condition = Conditions()
+		self.check_result = ProcessResultAction(self._driver, self)
 
 	def get_domain(self, domain):
 		return self._driver.get(domain)
