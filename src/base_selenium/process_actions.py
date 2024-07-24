@@ -41,7 +41,7 @@ class ProcessActions(BaseSelenium):
 			print("--------------- Start run |{}| --------------".format(test_case))
 			step = 1
 			for action in data[test_case]['action']:
-				print("------------- Action {} -------------".format(step))
+				print("------------- Action {} -------------".format(action['name'] if 'name' in action else step))
 				res = self.process_action(action)
 				result.append({
 					"case_test": test_case,
@@ -52,6 +52,8 @@ class ProcessActions(BaseSelenium):
 
 				if 'time_sleep_action' in data[test_case]:
 					self.sleep(data[test_case]['time_sleep_action'])
+				if 'sleep' in action:
+					self.sleep(action['sleep'])
 				step += 1
 
 		self.write_result_to_file(result)

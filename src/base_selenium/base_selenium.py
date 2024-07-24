@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import requests
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -57,6 +58,9 @@ class BaseSelenium:
 
 	def get_page_source(self):
 		return self._driver.page_source
+
+	def get_status_code(self):
+		return requests.head(self.get_current_url()).status_code
 
 	def get_element_attribute(self, element, attribute):
 		return element.get_attribute(attribute)
@@ -207,20 +211,22 @@ class BaseSelenium:
 	def accept_alert(self):
 		try:
 			Alert(self._driver).accept()
+			return True
 		except:
-			pass
+			return False
 
 	def dismiss_alert(self):
 		try:
 			Alert(self._driver).dismiss()
+			return True
 		except:
-			pass
+			return False
 
 	def get_text_alert(self):
 		try:
 			return Alert(self._driver).text
 		except:
-			pass
+			return False
 
 	def get_element(self, locator, locator_type='xpath'):
 		if self.check_locator_type(locator_type) is False:
