@@ -53,6 +53,12 @@ class BaseSelenium:
 	def get_current_url_by_js(self):
 		return self._driver.execute_script("return document.URL")
 
+	def get_origin(self):
+		return self._driver.execute_script("return window.location.origin;")
+
+	def get_user_agent(self):
+		return self._driver.execute_script("return navigator.userAgent;")
+
 	def get_element_text(self, element):
 		return element.text
 
