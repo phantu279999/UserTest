@@ -102,6 +102,7 @@ class BaseSelenium:
 		return self._driver.close()
 
 	def quit_driver(self):
+		print("Quit driver")
 		return self._driver.quit()
 
 	def refresh_page(self):
