@@ -65,7 +65,7 @@ def custom_version_mobile():
 		ingore_ssl_errors=True, exclude_switches=True, page_load_strategy=True
 	)
 	driver = webdriver.Chrome(options=option)
-	driver.implicitly_wait(10)
+	driver.implicitly_wait(settings.IMPLICITLY_WAIT)
 
 	return driver
 
@@ -73,16 +73,27 @@ def custom_version_mobile():
 def custom_version_mobile_headless():
 	option = set_chrome_options(
 		mobile_emulation=True, start_maximized=True, ingore_certifi_errors=True,
-		ingore_ssl_errors=True, exclude_switches=True, page_load_strategy=True, headless=True
+		ingore_ssl_errors=True, exclude_switches=True, page_load_strategy=True, headless=True,
 	)
 	driver = webdriver.Chrome(options=option)
-	driver.implicitly_wait(10)
+	driver.implicitly_wait(settings.IMPLICITLY_WAIT)
 
 	return driver
 
 
 def custome_firefox():
-	option_firefox = set_firefox_options(page_load_strategy=True)
+	option_firefox = set_firefox_options(
+		page_load_strategy=True,
+		disable_extensions=True,
+		disable_gpu=True,
+		no_sandbox=True,
+		disable_dev_shm_usage=True,
+		incognito=True,
+		disable_background_networking=True,
+		disable_notifications=True,
+		disable_infobars=True,
+		mute_audio=True,
+	)
 	driver = webdriver.Firefox(options=option_firefox)
 	driver.maximize_window()
 

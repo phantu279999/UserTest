@@ -7,6 +7,7 @@ from selenium.webdriver.firefox.options import Options as OptionFireFox
 def set_chrome_options(
 		start_maximized=False,  # User Interface and Experience
 		window_size=False,
+		dark_mode=False,
 		incognito=False,
 		disable_save_password_bubble=False,
 		disable_single_click_autofill=False,
@@ -51,6 +52,8 @@ def set_chrome_options(
 		options.add_argument("--start-maximized")
 	if window_size:
 		options.add_argument("--window-size={},{}".format(settings.WINDOW_SIZE[0], settings.WINDOW_SIZE[1]))
+	if dark_mode:
+		options.add_argument("--enable-features=WebContentsForceDark")
 	if incognito:
 		# Opens the browser in incognito mode.
 		options.add_argument('--incognito')
@@ -191,19 +194,123 @@ def set_chrome_options(
 	# options.add_argument("--disable-hang-monitor")
 
 
-	# if single_process:
-	# 	options.add_argument("--single-process")
-
 	return options
 
 
 def set_firefox_options(
 	headless=False,
 	page_load_strategy=False,
+	window_size=False, # User Interface and Experience
+	incognito=False,
+	disable_save_password_bubble=False,
+	disable_single_click_autofill=False,
+	disable_translate=False,
+	disable_prompt_on_repost=False,
+	ignore_certifi_errors=False,  # Security and Privacy
+	ignore_ssl_errors=False,
+	disable_web_security=False,
+	safebrowsing_disable_download_protection=False,
+	disable_gpu=False,  # Performance and Debugging
+	disable_extensions=False,
+	disable_popup_blocking=False,
+	disable_infobars=False,
+	remote_debugging_port=False,
+	disable_browser_side_navigation=False,
+	allow_file_access_from_files=False,  # File and Network Handling
+	dns_prefetch_disable=False,
+	user_agent=False,  # Miscellaneous
+	proxy_server=False,
+	no_sandbox=False,
+	disable_dev_shm_usage=False,
+	disable_blink_features=False,
+	disable_software_rasterizer=False,
+	no_proxy_server=False,
+	allow_running_insecure_content=False,
+	disable_logging=False,
+	log_level=False,
+	disable_3d_apis=False,
+	disable_renderer_backgrounding=False,
+	disable_background_networking=False,
+	disable_notifications=False,
+	mute_audio=False,
+	disable_features=False,
 ):
 	options = OptionFireFox()
+
 	if headless:
 		options.headless = True
 	if page_load_strategy:
 		options.page_load_strategy = settings.PAGE_LOAD_STRATEGY
+	if window_size:
+		options.add_argument("--width={}".format(settings.WINDOW_SIZE[0]))
+		options.add_argument("--height={}".format(settings.WINDOW_SIZE[1]))
+	if incognito:
+		options.add_argument('--incognito')
+	if disable_save_password_bubble:
+		options.add_argument("--disable-save-password-bubble")
+	if disable_single_click_autofill:
+		options.add_argument("--disable-single-click-autofill")
+	if disable_translate:
+		options.add_argument("--disable-translate")
+	if disable_prompt_on_repost:
+		options.add_argument("--disable-prompt-on-repost")
+	if ignore_certifi_errors:
+		options.add_argument("--ignore-certificate-errors")
+	if ignore_ssl_errors:
+		options.add_argument('--ignore-ssl-errors')
+	if disable_web_security:
+		options.add_argument('--disable-web-security')
+	if safebrowsing_disable_download_protection:
+		options.add_argument("--safebrowsing-disable-download-protection")
+	if disable_gpu:
+		options.add_argument('--disable-gpu')
+	if disable_extensions:
+		options.add_argument('--disable-extensions')
+	if disable_popup_blocking:
+		options.add_argument('--disable-popup-blocking')
+	if disable_infobars:
+		options.add_argument('--disable-infobars')
+	if remote_debugging_port:
+		options.add_argument('--remote-debugging-port={}'.format(settings.REMOTE_DEBUGGING_PORT))
+	if disable_browser_side_navigation:
+		options.add_argument("--disable-browser-side-navigation")
+	if allow_file_access_from_files:
+		options.add_argument("--allow-file-access-from-files")
+	if dns_prefetch_disable:
+		options.add_argument("--dns-prefetch-disable")
+	if user_agent:
+		from fake_useragent import UserAgent
+		ua = UserAgent()
+		options.add_argument('user-agent={}'.format(ua.random))
+	if proxy_server:
+		options.add_argument('--proxy-server={}'.format(settings.PROXY_SERVER))
+	if no_sandbox:
+		options.add_argument('--no-sandbox')
+	if disable_dev_shm_usage:
+		options.add_argument('--disable-dev-shm-usage')
+	if disable_blink_features:
+		options.add_argument('--disable-blink-features={}'.format(settings.DISABLE_BLICK_FEATURES))
+	if disable_software_rasterizer:
+		options.add_argument('--disable-software-rasterizer')
+	if no_proxy_server:
+		options.add_argument('--no-proxy-server')
+	if allow_running_insecure_content:
+		options.add_argument('--allow-running-insecure-content')
+	if disable_logging:
+		options.add_argument('--disable-logging')
+	if log_level:
+		options.add_argument('--log-level={}'.format(settings.LOG_LEVEL))
+	if disable_3d_apis:
+		options.add_argument("--disable-3d-apis")
+	if disable_renderer_backgrounding:
+		options.add_argument("--disable-renderer-backgrounding")
+	if disable_background_networking:
+		options.add_argument("--disable-background-networking")
+	if disable_notifications:
+		options.add_argument("--disable-notifications")
+	if mute_audio:
+		options.add_argument("--mute-audio")
+	if disable_features:
+		options.add_argument("--disable-features=%s" % ",".join(settings.DISABLE_FEATURES))
+
 	return options
