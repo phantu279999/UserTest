@@ -211,7 +211,14 @@ class ProcessActions(BaseSelenium):
 		return self.check_result.process_result(obj)
 
 	def _drag_and_drop(self, obj):
-		# Chua xu ly
+		if ('locator' not in obj) or ('locator_2' not in obj):
+			return {
+				"status": False,
+				"msg": "CLEAR: Not found \'locator\' or 'locator_2' in action"
+			}
+		element = self.get_element(obj['locator'], obj.get('locator_type', 'xpath'))
+		element_2 = self.get_element(obj['locator_2'], obj.get('locator_type_2', 'xpath'))
+		self.drag_and_drop_from_element1_to_element2(element, element_2)
 		return self.check_result.process_result(obj)
 
 	def _clear(self, obj):

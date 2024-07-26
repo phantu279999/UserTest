@@ -47,6 +47,9 @@ class BaseSelenium:
 	def get_title(self):
 		return self._driver.title
 
+	def get_title_by_js(self):
+		return self._driver.execute_script("return document.title")
+
 	def get_current_url(self):
 		return self._driver.current_url
 
@@ -82,6 +85,12 @@ class BaseSelenium:
 
 	def get_element_value_of_css_property(self, element, property):
 		return element.value_of_css_property(property)
+
+	def get_cookies(self):
+		return self._driver.get_cookies()
+
+	def save_cookie(self, domain):
+		self._driver.add_cookie({'domain': domain})
 
 	def go_back(self):
 		return self._driver.back()
@@ -164,6 +173,30 @@ class BaseSelenium:
 
 	def clear_text_in_element(self, element):
 		return element.clear()
+
+	def clear_data_element(self, element):
+		element.send_keys(Keys.CONTROL + "a")
+		element.send_keys(Keys.DELETE)
+
+	def move_and_click_element(self, element):
+		action = ActionChains(self._driver)
+		action.move_to_element(element)
+		action.click()
+		action.perform()
+
+	def drag_and_drop_from_element1_to_element2(self, element_1, element_2):
+		action = ActionChains(self._driver)
+		action.drag_and_drop(element_1, element_2)
+		action.release()
+		action.perform()
+
+	def drag_and_drop_by_click_hold(self, element1, element2):
+		ActionChains(self._driver).click_and_hold(element1).move_to_element(element2).release().perform()
+
+	def move_and_click_two_element(self, element_1, element_2):
+		action = ActionChains(self._driver)
+		action.move_to_element(element_1).click(element_2).release()
+		action.perform()
 
 	# ========================== EVENT SWITCH ================================
 	def switch_to_parent_iframe(self):
@@ -269,6 +302,9 @@ class BaseSelenium:
 		if locator_type in ['xpath', 'id', 'name', 'tag_name', 'class_name', 'css_selector', 'link_text']:
 			return True
 		return False
+
+	def setup_time_implicitly_wait(self, s):
+		self._driver.implicitly_wait(s)
 
 	@staticmethod
 	def sleep(sec):

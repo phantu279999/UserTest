@@ -1,7 +1,6 @@
 {
   "run": [
-    "test_login",
-    "test_search"
+    "test_doppable"
   ],
   "test_login": {
     "time_sleep_action": 1,
@@ -60,6 +59,20 @@
           "value": "searched for: test",
           "xpath": "//div[@id=\"content\"]//h2"
         }
+      }
+    ]
+  },
+  "test_doppable": {
+    "action": [
+      {
+        "type": "get_domain",
+        "value": "https://demoqa.com/droppable"
+      },
+      {
+        "type": "drag_and_drop",
+        "locator": "//*[@id=\"draggable\"]",
+        "locator_2": "//*[@id=\"droppable\"]",
+        "sleep": 5
       }
     ]
   }
