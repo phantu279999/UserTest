@@ -14,4 +14,8 @@ driver = 'chrome'
 
 if __name__ == '__main__':
 	process_actions = ProcessActions(driver)
-	process_actions.app_run()
+	try:
+		process_actions.app_run()
+		process_actions.quit_driver()
+	except:
+		process_actions.quit_driver()
