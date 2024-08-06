@@ -1,6 +1,6 @@
 {
   "run": [
-    "test_doppable"
+    "test_logout"
   ],
   "test_login": {
     "time_sleep_action": 1,
@@ -73,6 +73,86 @@
         "locator": "//*[@id=\"draggable\"]",
         "locator_2": "//*[@id=\"droppable\"]",
         "sleep": 5
+      }
+    ]
+  },
+  "test_login_2": {
+    "time_sleep_action": 1,
+    "action": [
+      {
+        "name": "",
+        "value": "https://practicetestautomation.com/",
+        "type": "get_domain"
+      },
+      {
+        "locator": "//*[@id=\"menu-item-20\"]",
+        "type": "click"
+      },
+      {
+        "type": "click",
+        "locator": "//a[text()='Test Login Page']"
+      },
+      {
+        "type": "input",
+        "value": "student",
+        "locator": "//input[@name=\"username\"]"
+      },
+      {
+        "type": "input",
+        "value": "Password123",
+        "locator": "//input[@name=\"password\"]"
+      },
+      {
+        "locator": "//button[@id=\"submit\"]",
+        "type": "click",
+        "result": {
+          "type": "title",
+          "value": "Logged In Successfully | Practice Test Automation"
+        }
+      }
+    ]
+  },
+  "test_logout": {
+    "time_sleep_action": 1,
+    "action": [
+      {
+        "name": "",
+        "value": "https://practicetestautomation.com/",
+        "type": "get_domain"
+      },
+      {
+        "locator": "//*[@id=\"menu-item-20\"]",
+        "type": "click"
+      },
+      {
+        "type": "click",
+        "locator": "//a[text()='Test Login Page']"
+      },
+      {
+        "type": "input",
+        "value": "student",
+        "locator": "//input[@name=\"username\"]"
+      },
+      {
+        "type": "input",
+        "value": "Password123",
+        "locator": "//input[@name=\"password\"]"
+      },
+      {
+        "locator": "//button[@id=\"submit\"]",
+        "type": "click",
+        "result": {
+          "type": "title",
+          "value": "Logged In Successfully | Practice Test Automation"
+        }
+      },
+      {
+        "type": "click",
+        "locator": "//a[text()='Log out']",
+        "result": {
+          "type": "url",
+          "value": "https://practicetestautomation.com/practice-test-login/"
+        }
       }
     ]
   }
