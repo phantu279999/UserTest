@@ -1,0 +1,7 @@
+2024-08-14 20:55:18,720 - test_case - INFO - ('Action ', True, 'Passed')
+2024-08-14 20:55:20,253 - test_case - INFO - ('Action 2', True, 'Passed')
+2024-08-14 20:55:21,731 - test_case - INFO - ('Action 3', True, 'Passed')
+2024-08-14 20:55:22,872 - test_case - INFO - ('Action 4', True, 'Passed')
+2024-08-14 20:55:24,012 - test_case - INFO - ('Action 5', True, 'Passed')
+2024-08-14 20:55:25,658 - test_case - INFO - ('Action 6', True, '(title) Passed')
+2024-08-14 20:55:27,202 - test_case - INFO - ('Action 7', True, '(url) Passed')

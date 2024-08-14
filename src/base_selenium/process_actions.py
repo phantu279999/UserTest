@@ -4,6 +4,7 @@ import json
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
+from src.common.base_log import BaseLogger
 from src.base_selenium.base_selenium import BaseSelenium
 
 
@@ -11,6 +12,7 @@ class ProcessActions(BaseSelenium):
 
 	def __init__(self, driver='chrome'):
 		BaseSelenium.__init__(self, driver)
+		self.logger = BaseLogger('test_case', log_file='log\\test_case.log')
 
 	def write_result_to_file(self, result):
 		with open('log/result_case_test.csv', 'w') as write_file:
@@ -61,6 +63,7 @@ class ProcessActions(BaseSelenium):
 					self.sleep(data[test_case]['time_sleep_action'])
 				if 'sleep' in action:
 					self.sleep(action['sleep'])
+				self.logger.info((name_step, res['status'], res['msg']))
 				step += 1
 
 		self.write_result_to_file(result)
