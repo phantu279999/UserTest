@@ -13,7 +13,12 @@ class ProcessActions(BaseSelenium):
 		BaseSelenium.__init__(self, driver)
 
 	def write_result_to_file(self, result):
-		...
+		with open('log/result_case_test.csv', 'w') as write_file:
+			write_file.write("Case Test,Name Step,Status,Message\n")
+			for row in result:
+				write_file.write("{},{},{},{}\n".format(
+					row['case_test'], row['name_step'], row['status'], row['message'])
+				)
 
 	@staticmethod
 	def open_file_test_cases():
@@ -41,15 +46,17 @@ class ProcessActions(BaseSelenium):
 			print("--------------- Start run |{}| --------------".format(test_case))
 			step = 1
 			for action in data[test_case]['action']:
-				print("------------- Action {} -------------".format(action['name'] if 'name' in action else step))
+				name_step = "Action {}".format(
+					action['name'] if 'name' in action else step
+				)
 				res = self.process_action(action)
 				result.append({
 					"case_test": test_case,
+					"name_step": name_step,
 					"status": res['status'],
 					"message": res['msg']
 				})
-				print(res['status'], res['msg'])
-
+				print(name_step, res['status'], res['msg'])
 				if 'time_sleep_action' in data[test_case]:
 					self.sleep(data[test_case]['time_sleep_action'])
 				if 'sleep' in action:

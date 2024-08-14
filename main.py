@@ -8,8 +8,8 @@ from src.base_selenium.process_actions import ProcessActions
 
 
 # driver = 'firefox'
-# driver = 'chrome_headless'
-driver = 'chrome'
+driver = 'chrome_headless'
+# driver = 'chrome'
 
 
 if __name__ == '__main__':

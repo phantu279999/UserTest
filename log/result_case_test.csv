@@ -1,0 +1,8 @@
+Case Test,Name Step,Status,Message
+test_logout,Action ,True,Passed
+test_logout,Action 2,True,Passed
+test_logout,Action 3,True,Passed
+test_logout,Action 4,True,Passed
+test_logout,Action 5,True,Passed
+test_logout,Action 6,True,(title) Passed
+test_logout,Action 7,True,(url) Passed
