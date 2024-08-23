@@ -9,7 +9,8 @@ Description: this file to config cases and actions for testing
 
 ### Start Testing
 file: main.py<br />
-Description: this file is starting automation test cases in file above .json 
+
+Description: this file is starting automation test cases in file above config_actions.json 
 
 ```bash
 --------------- Start run |test_login| --------------

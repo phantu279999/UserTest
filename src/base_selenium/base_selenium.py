@@ -109,10 +109,10 @@ class BaseSelenium:
 		self._driver.refresh()
 		self.sleep(5)
 
+	# ========================== EVENT CLICK ================================
 	def click_to_element(self, element):
 		return element.click()
 
-	# ========================== EVENT CLICK ================================
 	def click_to_element_by_script(self, element):
 		try:
 			self._driver.execute_script("arguments[0].click();", element)
