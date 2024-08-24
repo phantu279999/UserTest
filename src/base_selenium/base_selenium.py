@@ -111,9 +111,14 @@ class BaseSelenium:
 
 	# ========================== EVENT CLICK ================================
 	def click_to_element(self, element):
-		return element.click()
+		try:
+			return element.click()
+		except:
+			return self.click_to_element_by_script(element)
 
 	def click_to_element_by_script(self, element):
+		if not self.is_element_display(element):
+			raise Exception("Element is not displayed and cant click")
 		try:
 			self._driver.execute_script("arguments[0].click();", element)
 		except:
@@ -134,12 +139,12 @@ class BaseSelenium:
 	def submit_to_element(self, element):
 		return element.submit()
 
+	# ========================== EVENT INPUT ================================
 	def input_to_element(self, element, value):
 		if not self.check_element.is_element_visible(element):
 			return False
 		return element.send_keys(value)
 
-	# ========================== EVENT INPUT ================================
 	def input_enter_to_element(self, element, value):
 		element.send_keys(value).send_keys(Keys.ENTER)
 
