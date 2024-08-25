@@ -146,7 +146,12 @@ class BaseSelenium:
 		return element.send_keys(value)
 
 	def input_enter_to_element(self, element, value):
-		element.send_keys(value).send_keys(Keys.ENTER)
+		if not self.check_element.is_element_visible(element):
+			return False
+		try:
+			element.send_keys(value).send_keys(Keys.ENTER)
+		except:
+			return self.input_to_element_by_script(element, value)
 
 	def input_to_element_by_script(self, element, value):
 		try:
@@ -158,6 +163,8 @@ class BaseSelenium:
 		return element.rect
 
 	def click_element_input(self, element, value):
+		if not self.check_element.is_element_visible(element):
+			return False
 		try:
 			element.click()
 			element.send_keys(value)
@@ -165,12 +172,16 @@ class BaseSelenium:
 			raise Exception('Click and Input by js is not sucess. Please try')
 
 	def enter_to_element(self, element):
+		if not self.check_element.is_element_visible(element):
+			return False
 		try:
 			element.send_keys(Keys.ENTER)
 		except:
 			raise Exception('Enter to element by js is not sucess. Please try')
 
 	def double_enter_to_element(self, element):
+		if not self.check_element.is_element_visible(element):
+			return False
 		try:
 			element.send_keys(Keys.ENTER)
 			element.send_keys(Keys.ENTER)
@@ -181,16 +192,22 @@ class BaseSelenium:
 		return element.clear()
 
 	def clear_data_element(self, element):
+		if not self.check_element.is_element_visible(element):
+			return False
 		element.send_keys(Keys.CONTROL + "a")
 		element.send_keys(Keys.DELETE)
 
 	def move_and_click_element(self, element):
+		if not self.check_element.is_element_visible(element):
+			return False
 		action = ActionChains(self._driver)
 		action.move_to_element(element)
 		action.click()
 		action.perform()
 
 	def drag_and_drop_from_element1_to_element2(self, element_1, element_2):
+		if not self.check_element.is_element_visible(element_1):
+			return False
 		action = ActionChains(self._driver)
 		action.drag_and_drop(element_1, element_2)
 		action.release()
