@@ -63,7 +63,10 @@ class BaseSelenium:
 		return self._driver.execute_script("return navigator.userAgent;")
 
 	def get_element_text(self, element):
-		return element.text
+		try:
+			return element.text
+		except:
+			return ""
 
 	def get_page_source(self):
 		return self._driver.page_source
@@ -214,19 +217,29 @@ class BaseSelenium:
 		action.perform()
 
 	def drag_and_drop_by_click_hold(self, element1, element2):
-		ActionChains(self._driver).click_and_hold(element1).move_to_element(element2).release().perform()
+		try:
+			ActionChains(self._driver).click_and_hold(element1).move_to_element(element2).release().perform()
+			return True
+		except:
+			return False
 
 	def move_and_click_two_element(self, element_1, element_2):
-		action = ActionChains(self._driver)
-		action.move_to_element(element_1).click(element_2).release()
-		action.perform()
+		try:
+			action = ActionChains(self._driver)
+			action.move_to_element(element_1).click(element_2).release()
+			action.perform()
+			return True
+		except:
+			return False
 
 	# ========================== EVENT SWITCH ================================
 	def switch_to_parent_iframe(self):
 		try:
 			self._driver.switch_to.parent_frame()
+			return True
 		except:
-			raise ValueError('Cant switch to parent frame')
+			print('Cant switch to parent frame')
+			return False
 
 	def switch_to_iframe(self, element):
 		try:

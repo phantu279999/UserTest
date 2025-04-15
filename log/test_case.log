@@ -5,3 +5,10 @@
 2024-08-14 20:55:24,012 - test_case - INFO - ('Action 5', True, 'Passed')
 2024-08-14 20:55:25,658 - test_case - INFO - ('Action 6', True, '(title) Passed')
 2024-08-14 20:55:27,202 - test_case - INFO - ('Action 7', True, '(url) Passed')
+2025-04-15 14:25:10,418 - test_case - INFO - [test_logout] Step: Action  - PASS: Passed
+2025-04-15 14:25:11,788 - test_case - INFO - [test_logout] Step: Action 2 - PASS: Passed
+2025-04-15 14:25:13,154 - test_case - INFO - [test_logout] Step: Action 3 - PASS: Passed
+2025-04-15 14:25:14,279 - test_case - INFO - [test_logout] Step: Action 4 - PASS: Passed
+2025-04-15 14:25:15,389 - test_case - INFO - [test_logout] Step: Action 5 - PASS: Passed
+2025-04-15 14:25:17,545 - test_case - INFO - [test_logout] Step: Action 6 - PASS: (title) Passed
+2025-04-15 14:25:18,918 - test_case - INFO - [test_logout] Step: Action 7 - PASS: (url) Passed

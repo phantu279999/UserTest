@@ -8,11 +8,39 @@ from src.common.base_log import BaseLogger
 from src.base_selenium.base_selenium import BaseSelenium
 
 
+def with_result_check(func):
+	def wrapper(self, obj):
+		try:
+			status = func(self, obj)
+			return self.check_result.process_result(obj)
+		except Exception as e:
+			return {'status': False, 'msg': str(e)}
+	return wrapper
+
+
 class ProcessActions(BaseSelenium):
 
 	def __init__(self, driver='chrome'):
 		BaseSelenium.__init__(self, driver)
 		self.logger = BaseLogger('test_case', log_file='log\\test_case.log')
+
+		self.action_map = {
+			'get_domain': self._get_domain,
+			'click': self._click,
+			'open_new_tab': self._open_new_tab,
+			'input': self._input,
+			'input_enter': self._input_enter,
+			'enter': self._enter,
+			'switch_to_frame': self._switch_to_frame,
+			'switch_to_next_tab': self._switch_to_next_tab,
+			'switch_to_last_tab': self._switch_to_last_tab,
+			'switch_to_first_tab': self._switch_to_first_tab,
+			'move': self._move,
+			'move_click': self._move_click,
+			'drag_and_drop': self._drag_and_drop,
+			'clear': self._clear,
+			'clear_and_input': self._clear_and_input
+		}
 
 	def write_result_to_file(self, result):
 		with open('log/result_case_test.csv', 'w') as write_file:
@@ -44,6 +72,10 @@ class ProcessActions(BaseSelenium):
 			print("Can't read the file .json. Please check again")
 			return
 
+		if 'run' not in data:
+			print("Missing 'run' key in config_actions.json")
+			return
+
 		for test_case in data['run']:
 			print("--------------- Start run |{}| --------------".format(test_case))
 			step = 1
@@ -63,7 +95,12 @@ class ProcessActions(BaseSelenium):
 					self.sleep(data[test_case]['time_sleep_action'])
 				if 'sleep' in action:
 					self.sleep(action['sleep'])
-				self.logger.info((name_step, res['status'], res['msg']))
+
+				if res['status']:
+					self.logger.info(f"[{test_case}] Step: {name_step} - PASS: {res['msg']}")
+				else:
+					self.logger.error(f"[{test_case}] Step: {name_step} - FAIL: {res['msg']}")
+				# self.logger.info((name_step, res['status'], res['msg']))
 				step += 1
 
 		self.write_result_to_file(result)
@@ -76,36 +113,13 @@ class ProcessActions(BaseSelenium):
 				"msg": "Not found 'type' in action"
 			}
 
-		if obj['type'] == 'get_domain':
-			return self._get_domain(obj)
-		elif obj['type'] == 'click':
-			return self._click(obj)
-		elif obj['type'] == 'open_new_tab':
-			return self._open_new_tab(obj)
-		elif obj['type'] == 'input':
-			return self._input(obj)
-		elif obj['type'] == 'input_enter':
-			return self._input_enter(obj)
-		elif obj['type'] == 'enter':
-			return self._enter(obj)
-		elif obj['type'] == 'switch_to_frame':
-			return self._switch_to_frame(obj)
-		elif obj['type'] == 'switch_to_next_tab':
-			return self._switch_to_next_tab(obj)
-		elif obj['type'] == 'switch_to_last_tab':
-			return self._switch_to_last_tab(obj)
-		elif obj['type'] == 'switch_to_first_tab':
-			return self._switch_to_first_tab(obj)
-		elif obj['type'] == 'move':
-			return self._move(obj)
-		elif obj['type'] == 'move_click':
-			return self._move_click(obj)
-		elif obj['type'] == 'drag_and_drop':
-			return self._drag_and_drop(obj)
-		elif obj['type'] == 'clear':
-			return self._clear(obj)
-		elif obj['type'] == 'clear_and_input':
-			return self._clear_and_input(obj)
+		action_func = self.action_map.get(obj['type'])
+
+		if not action_func:
+			return {'status': False, 'msg': f"Action type '{obj['type']}' is not supported"}
+
+		return action_func(obj)
+
 
 	def _get_domain(self, obj):
 		if 'value' not in obj:
