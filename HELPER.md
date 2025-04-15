@@ -1,7 +1,9 @@
-# This is helper using tool
-<hr>
 
-### Structure of config test actions
+# Helper Tool Guide
+
+---
+
+## Structure of Config Test Actions
 
 ```json
 {
@@ -15,7 +17,7 @@
       {
         "name": "",
         "value": "http://testphp.vulnweb.com/",
-        "type": "get_domain",
+        "type": "get_domain"
       },
       {
         "locator": "//input[@value=\"login\"]",
@@ -52,86 +54,75 @@
 }
 ```
 
-#### Explain above file json
+---
 
-***run***: this will decide the configuration of the below testcases, It decides which test cases are run.
-<br>
-***testcase***(test_login): name of testcase, It's contain chain actions.
+## Explanation of the Above JSON
 
-    time_sleep_action: Using for each action sleep time
-    action: [actions of testcase]
+- `run`: Defines the test cases to be executed.
+- `test_login`, `other_test_case`: Named test cases, each containing:
+  - `time_sleep_action`: Delay time between actions.
+  - `action`: An array of action objects with specific interactions and validations.
 
+---
 
-## Explain Elements
-<hr>
+## Elements Reference
 
-#### Element action:
-    name
-    type
-    locator
-    locator_type
-    value
-    sleep
-    result
-    locator_type_2
-    locator_2
+### Element Action Fields:
+- `name`
+- `type`
+- `locator`
+- `locator_type`
+- `value`
+- `sleep`
+- `result`
+- `locator_type_2`
+- `locator_2`
 
-#### Type action:
-    get_domain,
-    open_new_tab,
-    click,
-    input,
-    input_enter,
-    enter,
-    switch_to_frame,
-    switch_to_next_tab,
-    switch_to_last_tab,
-    switch_to_first_tab,
-    move,
-    move_click,
-    drag_and_drop,
-    clear,
-    clear_and_input
+---
 
-#### Type locator
-if not provide type, It's default is xpath
+### Type Action:
+- `get_domain`
+- `open_new_tab`
+- `click`
+- `input`
+- `input_enter`
+- `enter`
+- `switch_to_frame`
+- `switch_to_next_tab`
+- `switch_to_last_tab`
+- `switch_to_first_tab`
+- `move`
+- `move_click`
+- `drag_and_drop`
+- `clear`
+- `clear_and_input`
 
-    id
-    xpath
-    link text
-    partial link text
-    name
-    tag name
-    class name
-    css selector
+---
 
+### Type Locator:
+> Default: `xpath`
 
-#### Type result
-Check result of executed action
+- `id`
+- `xpath`
+- `link text`
+- `partial link text`
+- `name`
+- `tag name`
+- `class name`
+- `css selector`
 
-    title
-    xpath
-    display
-    xpath_text
-    url
-    alert
-    status
+---
 
+### Type Result:
+Defines what the test should verify after each action.
 
-***title***: Check title of current page.
-<br>
-***xpath***: Check xpath is exits.
-<br>
-***display***: Check xpath is display.
-<br>
-***xpath_text***: Check text of text.
-<br>
-***url***: Check current url.
-<br>
-***alert***: Check alert is display.
-<br>
-***status***: Check status of current page.
-<br>
+- `title`: Check current page title.
+- `xpath`: Check if xpath exists.
+- `display`: Check if xpath element is visible.
+- `xpath_text`: Check if the xpath element’s text equals value.
+- `url`: Check if current URL equals value.
+- `alert`: Check if an alert is displayed.
+- `status`: Check if HTTP status code equals value.
 
 **Example**:
 

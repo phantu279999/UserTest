@@ -1,59 +1,70 @@
-# SIMPLE AUTOMATION TEST
-(This project is in development)
-<hr>
+# 🧪 Simple Automation Test Framework
+> ⚠️ *This project is currently under development.*
 
-### Config action for testing
-file: config_actions.json<br />
-Description: this file to config cases and actions for testing
-<hr>
+---
 
-### Start Testing
-file: main.py<br />
+## 📁 Configuration
 
-Description: this file is starting automation test cases in file above config_actions.json 
+### `config_actions.json`
+This file defines the test cases and corresponding actions to automate.
 
+- Each test case includes a list of actions (e.g., click, input, verify).
+- Fully customizable with flexible action types and locators.
+
+---
+
+## 🚀 How to Run Tests
+
+### `main.py`
+
+This script starts executing the automation test cases defined in `config_actions.json`.
+
+### Example Output:
 ```bash
 --------------- Start run |test_login| --------------
-------------- Action 1 -------------
-True Passed
-------------- Action 2 -------------
-True Passed
-------------- Action 3 -------------
-True Passed
-------------- Action 4 -------------
-True Passed
-------------- Action 5 -------------
-True (title)Passed
+------------- Action 1 -------------  
+True Passed  
+------------- Action 2 -------------  
+True Passed  
+------------- Action 3 -------------  
+True Passed  
+------------- Action 4 -------------  
+True Passed  
+------------- Action 5 -------------  
+True (title) Passed  
+
 --------------- Start run |test_search| --------------
-------------- Action 1 -------------
-True Passed
-------------- Action 2 -------------
-True Passed
-------------- Action 3 -------------
-True Passed
-------------- Action 4 -------------
-True (xpath_text)Passed
+------------- Action 1 -------------  
+True Passed  
+------------- Action 2 -------------  
+True Passed  
+------------- Action 3 -------------  
+True Passed  
+------------- Action 4 -------------  
+True (xpath_text) Passed  
 ```
-<hr>
 
-## Options Environments Driver Test
-#### Testing by Chrome<br>
-chrome<br>
+---
 
-#### Testing by Chrome is not display<br>
-chrome_headless<br>
+## 🌐 Supported Environment Drivers
 
-#### Testing by Chrome version Mobile<br>
-chrome_mobile<br>
+| Environment                | Description                                |
+|----------------------------|--------------------------------------------|
+| `chrome`                   | Run on Chrome in normal mode               |
+| `chrome_headless`          | Run on Chrome in headless mode             |
+| `chrome_mobile`            | Simulate mobile browser on Chrome          |
+| `chrome_mobile_headless`   | Mobile simulation in headless Chrome       |
+| `firefox`                  | Run on Firefox browser                     |
 
-#### Testing by Chrome version Mobile is not display<br>
-chrome_mobile_headless<br>
+> ✅ Default is `chrome`.
 
-#### Testing by FireFox<br>
-firefox<br>
+---
 
-## License
+## 📜 License
 
-<hr>
+This project is licensed by **Phan Anh Tu**.  
+Use and contribute freely with credit.
 
-By Phan Anh Tu
+---
+
+Feel free to suggest more features or contribute with pull requests!
