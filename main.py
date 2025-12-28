@@ -16,6 +16,7 @@ if __name__ == '__main__':
 	process_actions = ProcessActions(driver)
 	try:
 		result = process_actions.app_run()
+		process_actions.quit_driver()
 		if not result:
 			sys.exit(1)
 
@@ -27,6 +28,5 @@ if __name__ == '__main__':
 			print("TEST PASSED")
 			sys.exit(0)
 
-		process_actions.quit_driver()
 	except:
 		process_actions.quit_driver()
