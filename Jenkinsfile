@@ -14,7 +14,7 @@ pipeline {
 
         stage('Setup Python') {
             steps {
-                sh '''
+                bat '''
                 python -m venv venv
                 source venv/bin/activate
                 pip install -r requirements.txt
@@ -24,7 +24,7 @@ pipeline {
 
         stage('Run Automation') {
             steps {
-                sh '''
+                bat '''
                 source venv/bin/activate
                 python main.py
                 '''
