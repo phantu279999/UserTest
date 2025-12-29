@@ -8,15 +8,15 @@ from src.base_selenium.process_actions import ProcessActions
 
 
 # driver = 'firefox'
-driver = 'chrome_headless'
+# driver = 'chrome_headless'
 # driver = 'chrome'
+driver = 'chrome_grid'
 
 
 if __name__ == '__main__':
 	process_actions = ProcessActions(driver)
 	try:
 		result = process_actions.app_run()
-		process_actions.quit_driver()
 		if not result:
 			sys.exit(1)
 
@@ -27,6 +27,7 @@ if __name__ == '__main__':
 		else:
 			print("TEST PASSED")
 			sys.exit(0)
-
 	except:
+		sys.exit(1)
+	finally:
 		process_actions.quit_driver()

@@ -19,10 +19,27 @@ pipeline {
             }
         }
 
+        stage('Start Selenium Grid') {
+            steps {
+                bat '''
+                cd docker
+                docker-compose up -d
+                '''
+            }
+        }
+
+        stage('Wait for Grid') {
+            steps {
+                bat '''
+                timeout /t 10 /nobreak
+                '''
+            }
+        }
+
         stage('Run Automation') {
             steps {
                 bat '''
-                venv\\Scripts\\python main.py
+                venv\\Scripts\\python main.py --driver grid
                 '''
             }
         }
@@ -30,6 +47,10 @@ pipeline {
 
     post {
         always {
+            bat '''
+            cd docker
+            docker-compose down
+            '''
             archiveArtifacts artifacts: 'log\\**', allowEmptyArchive: true
         }
         failure {

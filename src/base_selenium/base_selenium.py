@@ -14,7 +14,8 @@ from src.base_selenium.setup_driver import (
 	custome_chrome_headless,
 	custom_version_mobile,
 	custom_version_mobile_headless,
-	custome_firefox
+	custome_firefox,
+	chrome_grid
 )
 from src.base_selenium.check_elements import CheckElementDriver
 from src.base_selenium.conditions import Conditions
@@ -36,6 +37,8 @@ class BaseSelenium:
 			self._driver = custom_version_mobile_headless()
 		elif driver == 'firefox':
 			self._driver = custome_firefox()
+		elif driver == "chrome_grid":
+			self._driver = chrome_grid()
 
 		self.check_element = CheckElementDriver()
 		self.condition = Conditions()

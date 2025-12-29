@@ -1,4 +1,8 @@
 from selenium import webdriver
+from selenium.webdriver import Remote
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 import chromedriver_autoinstaller
 
 from src.config import settings
@@ -97,4 +101,21 @@ def custome_firefox():
 	driver = webdriver.Firefox(options=option_firefox)
 	driver.maximize_window()
 
+	return driver
+
+
+def chrome_grid():
+	options = set_chrome_options(
+		headless=True,
+		no_sandbox=True,
+		disable_dev_shm_usage=True,
+		start_maximized=True,
+	)
+
+	driver = Remote(
+		command_executor='http://localhost:4444/wd/hub',
+		options=options,
+	)
+
+	driver.implicitly_wait(settings.IMPLICITLY_WAIT)
 	return driver

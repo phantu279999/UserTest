@@ -12,3 +12,18 @@
 2025-04-15 14:25:15,389 - test_case - INFO - [test_logout] Step: Action 5 - PASS: Passed
 2025-04-15 14:25:17,545 - test_case - INFO - [test_logout] Step: Action 6 - PASS: (title) Passed
 2025-04-15 14:25:18,918 - test_case - INFO - [test_logout] Step: Action 7 - PASS: (url) Passed
+2025-12-29 14:46:32,984 - test_case - INFO - [test_logout] Step: Action  - PASS: Passed
+2025-12-29 14:52:47,859 - test_case - INFO - [test_logout] Step: Action  - PASS: Passed
+2025-12-29 14:52:49,510 - test_case - INFO - [test_logout] Step: Action 2 - PASS: Passed
+2025-12-29 14:52:50,946 - test_case - INFO - [test_logout] Step: Action 3 - PASS: Passed
+2025-12-29 14:52:52,148 - test_case - INFO - [test_logout] Step: Action 4 - PASS: Passed
+2025-12-29 14:52:53,338 - test_case - INFO - [test_logout] Step: Action 5 - PASS: Passed
+2025-12-29 14:52:55,159 - test_case - INFO - [test_logout] Step: Action 6 - PASS: (title) Passed
+2025-12-29 14:52:56,667 - test_case - INFO - [test_logout] Step: Action 7 - PASS: (url) Passed
+2025-12-29 14:55:32,729 - test_case - INFO - [test_logout] Step: Action  - PASS: Passed
+2025-12-29 14:55:34,364 - test_case - INFO - [test_logout] Step: Action 2 - PASS: Passed
+2025-12-29 14:55:35,787 - test_case - INFO - [test_logout] Step: Action 3 - PASS: Passed
+2025-12-29 14:55:37,033 - test_case - INFO - [test_logout] Step: Action 4 - PASS: Passed
+2025-12-29 14:55:38,225 - test_case - INFO - [test_logout] Step: Action 5 - PASS: Passed
+2025-12-29 14:55:40,074 - test_case - INFO - [test_logout] Step: Action 6 - PASS: (title) Passed
+2025-12-29 14:55:41,583 - test_case - INFO - [test_logout] Step: Action 7 - PASS: (url) Passed
