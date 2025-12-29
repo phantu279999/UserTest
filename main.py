@@ -15,7 +15,18 @@ driver = 'chrome_headless'
 if __name__ == '__main__':
 	process_actions = ProcessActions(driver)
 	try:
-		process_actions.app_run()
+		result = process_actions.app_run()
 		process_actions.quit_driver()
+		if not result:
+			sys.exit(1)
+
+		has_fail = any(step["status"] is False for step in result)
+		if has_fail:
+			print("TEST FAILED")
+			sys.exit(1)
+		else:
+			print("TEST PASSED")
+			sys.exit(0)
+
 	except:
 		process_actions.quit_driver()
