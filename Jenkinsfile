@@ -1,11 +1,8 @@
 pipeline {
     agent any
 
-    triggers {
-        cron('H 2 * * *')
-    }
-
     stages {
+
         stage('Checkout') {
             steps {
                 git 'https://github.com/phantu279999/UserTest.git'
@@ -16,8 +13,8 @@ pipeline {
             steps {
                 bat '''
                 python -m venv venv
-                source venv/bin/activate
-                pip install -r requirements.txt
+                venv\\Scripts\\python -m pip install --upgrade pip
+                venv\\Scripts\\python -m pip install -r requirements.txt
                 '''
             }
         }
@@ -25,8 +22,7 @@ pipeline {
         stage('Run Automation') {
             steps {
                 bat '''
-                source venv/bin/activate
-                python main.py
+                venv\\Scripts\\python main.py
                 '''
             }
         }
@@ -34,7 +30,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'log/*.log, log/*.csv'
+            archiveArtifacts artifacts: 'log\\**', allowEmptyArchive: true
         }
         failure {
             echo 'Automation failed – check logs'
