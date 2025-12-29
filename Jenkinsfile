@@ -44,9 +44,9 @@ pipeline {
 
         stage('Run Automation') {
             steps {
-                bat '''
+                bat(returnStatus: true, script: '''
                 venv\\Scripts\\python main.py --driver grid
-                '''
+                ''')
             }
         }
     }
