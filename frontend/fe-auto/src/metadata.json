@@ -1,0 +1,5 @@
+{
+  "name": "AutoTest Config Builder",
+  "description": "A visual editor and AI-powered generator for backend automation test configurations.",
+  "requestFramePermissions": []
+}
