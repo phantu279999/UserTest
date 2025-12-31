@@ -13,6 +13,21 @@ This file defines the test cases and corresponding actions to automate.
 
 ---
 
+## Front-end Auto Config
+
+### `frondend/fe-auto`
+- React-powered interfaces can help users configure actions more easily.
+
+```commandline
+    npm install
+    npm install lucide-react
+    npm run dev
+```
+
+![img.png](frontend/fe-auto/src/assets/img.png)
+
+---
+
 ## 🚀 How to Run Tests
 
 ### `main.py`
@@ -48,13 +63,14 @@ True (xpath_text) Passed
 
 ## 🌐 Supported Environment Drivers
 
-| Environment                | Description                                |
-|----------------------------|--------------------------------------------|
-| `chrome`                   | Run on Chrome in normal mode               |
-| `chrome_headless`          | Run on Chrome in headless mode             |
-| `chrome_mobile`            | Simulate mobile browser on Chrome          |
-| `chrome_mobile_headless`   | Mobile simulation in headless Chrome       |
-| `firefox`                  | Run on Firefox browser                     |
+| Environment              | Description                             |
+|--------------------------|-----------------------------------------|
+| `chrome`                 | Run on Chrome in normal mode            |
+| `chrome_headless`        | Run on Chrome in headless mode          |
+| `chrome_mobile`          | Simulate mobile browser on Chrome       |
+| `chrome_mobile_headless` | Mobile simulation in headless Chrome    |
+| `firefox`                | Run on Firefox browser                  |
+| `chrome_grid`            | Run on Remote mode + parallel + mul env |
 
 > ✅ Default is `chrome`.
 
