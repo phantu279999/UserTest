@@ -15,7 +15,7 @@ This file defines the test cases and corresponding actions to automate.
 
 ## Front-end Auto Config
 
-### `frondend/fe-auto`
+### `frontend/fe-auto`
 - React-powered interfaces can help users configure actions more easily.
 
 ```commandline
